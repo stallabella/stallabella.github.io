@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stallabella - A Magical Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Indie+Flower&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Indie Flower', cursive;
+        }
+
+        h1,
+        h2 {
+            font-family: 'Amatic SC', cursive;
+        }
+
+        .book-cover {
+            width: 100%;
+            max-width: 450px;
+            /* Adjust as needed */
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+            transform: perspective(1000px) rotateY(-40deg);
+            transform-origin: left center;
+            position: relative;
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px; /* Adjust width for page thickness */
+            height: 100%;
+            background: linear-gradient(to right, #fff, #ddd);
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+            transform: perspective(1000px) rotateY(40deg);
+            transform-origin: left center;
+        }
+
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10px; /* Adjust position for binding */
+            width: 5px; /* Adjust width for binding */
+            height: 100%;
+            background: #333; /* Color for binding */
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+            transform: perspective(1000px) rotateY(40deg);
+            transform-origin: left center;
+        }
+    </style>
+</head>
+
+<body class="bg-purple-100 font-sans">
+    <header-component></header-component>
+    <main class="container mx-auto px-4 py-8">
+        <about-book id="about"></about-book>
+        <reader-reviews id="reviews"></reader-reviews>
+        <watch-story id="watch"></watch-story>
+        <code-behind-story id="code"></code-behind-story>
+        <making-movie id="movie"></making-movie>
+    </main>
+    <footer-component></footer-component>
+
+    <script>
+        class HeaderComponent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<header-content></header-content>`;
+            }
+        }
+
+        class HeaderContent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `
+                    <header class="mb-8 relative bg-cover bg-center h-screen flex items-end" style="background-image: url('./img/book-006.png');">
+                        <div class="absolute inset-0 bg-purple-600 opacity-50"></div>
+                        <div class="relative z-10 container mx-auto px-4 py-24 text-center text-white mb-8">
+                            <h1 class="text-[12rem] font-bold drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">Stallabella</h1>
+                            <p class="text-2xl drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">A Tale of Playfulness and Punctuality</p>
+                        </div>
+                    </header>
+                `;
+            }
+        }
+
+        class AboutBook extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<about-book-content></about-book-content>`;
+            }
+        }
+
+        class AboutBookContent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `
+                    <section class="mb-12">
+                        <h2 class="text-5xl font-bold mb-8">About the Book</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-lg mb-4">
+                                    Meet Stallabella, the delightful 7-year-old with the most enchanting blond curls and sparkling blue eyes! Every morning, she turns her routine into a whimsical performance, from pretending to be a sleepy cat to spinning wild tales about her breakfast. But when her playful stalling causes her to miss a magical school show, Stallabella feels a twinge of disappointment. 
+                                </p>
+                                <p class="text-lg mb-8">
+                                    Determined to make a change, she transforms into Swiftabella, embracing a new, speedy approach to her mornings! With her parents beaming with pride, Swiftabella discovers the perfect balance between her playful spirit and the importance of being on time. Join her on this heartwarming adventure as she learns that fun and responsibility can go hand in hand, all while ensuring she never misses out on the magic of life! Get ready for giggles, joy, and a sprinkle of magic in this charming tale!
+                                </p>
+                            </div>
+                            <div class="flex flex-col justify-center items-center">
+                                <img src="../cover.png" alt="Stallabella's Story Book Cover" class="book-cover">
+                            </div>
+                        </div>
+                         <div class="flex justify-center">
+                            <buy-button href="https://www.amazon.com" text="Buy on Amazon $12.99"></buy-button>
+                            </div>
+                    </section>
+                `;
+            }
+        }
+
+        class ReaderReviews extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<reader-reviews-content>
+                    </reader-reviews-content>`;
+            }
+        }
+
+        class ReaderReviewsContent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `
+                    <section class="mb-8">
+                        <h2 class="text-5xl font-bold mb-8">What Readers Are Saying</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <review-item text="A delightful story that teaches an important lesson. My kids love it!" author="Happy Parent"></review-item>
+                            <review-item text="Stallabella is such a relatable character. This book is a must-read!" author="Elementary School Teacher"></review-item>
+                        </div>
+                    </section>
+                `;
+            }
+        }
+
+        class ReviewItem extends HTMLElement {
+            connectedCallback() {
+                const text = this.getAttribute('text');
+                const author = this.getAttribute('author');
+                this.innerHTML = `
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <p class="italic">"${text}"</p>
+                        <p class="font-bold mt-2">- ${author}</p>
+                    </div>
+                `;
+            }
+        }
+
+        class WatchStory extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<watch-story-content></watch-story-content>`;
+            }
+        }
+
+        class WatchStoryContent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `
+                    <section class="mb-12">
+                        <h2 class="text-5xl font-bold mb-8">Watch the Story</h2>
+                        <div class="relative" style="padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+                            <iframe src="https://www.youtube.com/embed/6hCrjoZWouk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+                        </div>
+                    </section>
+                `;
+            }
+        }
+
+        class CodeBehindStory extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<code-behind-story-content></code-behind-story-content>`;
+            }
+        }
+
+        class CodeBehindStoryContent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `
+                    <section class="mb-12">
+                        <h2 class="text-5xl font-bold mb-8">The Code Behind the Story</h2>
+                        <p class="text-lg mb-4">
+                            The Stallabella story was written with the help of ChatGPT. It took a couple of attempts to get a story that we liked. We adjusted the prompt a few times and generated several versions of the story until we were happy with the results. The final story came from ChatGPT with little to no edits required.
+                        </p>
+                        <p class="text-lg mb-8">
+                            If you're interested in exploring the code that powers this magical story, you can find the complete project on GitHub. Feel free to check it out, contribute, or even use it as inspiration for your own projects!
+                        </p>
+                        <div class="flex justify-center">
+                            <view-button href="https://github.com/yourusername/stallabella-story" text="View on GitHub"></view-button>
+                        </div>
+                    </section>
+                `;
+            }
+        }
+
+        class MakingMovie extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<making-movie-content></making-movie-content>`;
+            }
+        }
+
+        class MakingMovieContent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `
+                    <section class="mb-12">
+                        <h2 class="text-5xl font-bold mb-8">Making the Movie</h2>
+                        <p class="text-lg mb-4">
+                            Bringing the Stallabella story to life as a movie was an exciting journey. We used RunwayML's image-to-video generator to animate the storybook images, giving them a dynamic and engaging feel. To add narration, we utilized OpenAI's speech-to-text service to convert the written words of the story into dictation. Finally, we manually stitched everything together in a video editor, ensuring that the visuals and audio flowed seamlessly to create a captivating viewing experience.
+                        </p>
+                    </section>
+                `;
+            }
+        }
+
+        class FooterComponent extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<footer-content></footer-content>`;
+            }
+        }
+
+        class FooterContent extends HTMLElement {
+            connectedCallback() {
+                const currentYear = new Date().getFullYear();
+                this.innerHTML = `
+                    <footer class="bg-purple-600 text-white py-4 mt-8">
+                        <div class="container mx-auto px-4 text-center">
+                            <p>&copy; ${currentYear} Stallabella's Story. All rights reserved.</p>
+                        </div>
+                    </footer>
+                `;
+            }
+        }
+
+        class BuyButton extends HTMLElement {
+            connectedCallback() {
+                const href = this.getAttribute('href');
+                const text = this.getAttribute('text');
+                const className = "bg-yellow-500 hover:bg-yellow-600 text-black"
+                this.innerHTML = `<base-button href="${href}" text="${text}" class="${className}"></base-button>`;
+            }
+        }
+
+        class ViewButton extends HTMLElement {
+            connectedCallback() {
+                const href = this.getAttribute('href');
+                const text = this.getAttribute('text');
+                const className = "bg-blue-500 hover:bg-blue-600 text-white";
+                this.innerHTML = `<base-button href="${href}" text="${text}" class="${className}"></base-button>`;
+            }
+        }
+
+        class BaseButton extends HTMLElement {
+            connectedCallback() {
+                const href = this.getAttribute('href');
+                const text = this.getAttribute('text');
+                const className = this.getAttribute('class');
+                this.innerHTML = `<a href="${href}" target="_blank" class="${className} py-4 px-8 rounded inline-block text-3xl">${text}</a>`;
+            }
+        }
+
+        customElements.define('header-component', HeaderComponent);
+        customElements.define('header-content', HeaderContent);
+        customElements.define('about-book', AboutBook);
+        customElements.define('about-book-content', AboutBookContent);
+        customElements.define('reader-reviews', ReaderReviews);
+        customElements.define('reader-reviews-content', ReaderReviewsContent);
+        customElements.define('review-item', ReviewItem);
+        customElements.define('watch-story', WatchStory);
+        customElements.define('watch-story-content', WatchStoryContent);
+        customElements.define('code-behind-story', CodeBehindStory);
+        customElements.define('code-behind-story-content', CodeBehindStoryContent);
+        customElements.define('making-movie', MakingMovie);
+        customElements.define('making-movie-content', MakingMovieContent);
+        customElements.define('footer-component', FooterComponent);
+        customElements.define('footer-content', FooterContent);
+        customElements.define('base-button', BaseButton);
+        customElements.define('buy-button', BuyButton);
+        customElements.define('view-button', ViewButton);
+    </script>
+</body>
+
+</html>
