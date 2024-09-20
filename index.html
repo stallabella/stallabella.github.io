@@ -65,8 +65,8 @@
         <about-book id="about"></about-book>
         <reader-reviews id="reviews"></reader-reviews>
         <watch-story id="watch"></watch-story>
-        <code-behind-story id="code"></code-behind-story>
-        <making-movie id="movie"></making-movie>
+        <!-- <code-behind-story id="code"></code-behind-story> -->
+        <!-- <making-movie id="movie"></making-movie> -->
     </main>
     <footer-component></footer-component>
 
@@ -85,6 +85,9 @@
                         <div class="relative z-10 container mx-auto px-4 py-24 text-center text-white mb-8">
                             <h1 class="text-[12rem] font-bold drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">Stallabella</h1>
                             <p class="text-2xl drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">A Tale of Playfulness and Punctuality</p>
+                            <div class="mt-8">
+                            <buy-button href="https://drive.google.com/file/d/1SwBSN7XiI3VmJIkjlavYpX41-nCaH91E/view?usp=drive_link" text="Buy on Amazon $12.99"></buy-button>
+                            </div>
                         </div>
                     </header>
                 `;
@@ -112,12 +115,12 @@
                                 </p>
                             </div>
                             <div class="flex flex-col justify-center items-center">
-                                <img src="img/cover.png" alt="Stallabella's Story Book Cover" class="book-cover">
+                                <img src="img/book-mockup.png" alt="Stallabella's Story Book Cover">
                             </div>
                         </div>
                          <div class="flex justify-center">
-                            <buy-button href="https://www.amazon.com" text="Buy on Amazon $12.99"></buy-button>
-                            </div>
+                            <buy-button href="https://drive.google.com/file/d/1SwBSN7XiI3VmJIkjlavYpX41-nCaH91E/view?usp=drive_link" text="Buy on Amazon $12.99"></buy-button>
+                        </div>
                     </section>
                 `;
             }
@@ -131,12 +134,16 @@
         }
 
         class ReaderReviewsContent extends HTMLElement {
+            
             connectedCallback() {
                 this.innerHTML = `
                     <section class="mb-8">
                         <h2 class="text-5xl font-bold mb-8">What Readers Are Saying</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <review-item text="A delightful story that teaches an important lesson. My kids love it!" author="Happy Parent"></review-item>
+                            <review-item 
+                                text="Wonderful story turning a common point of tension into a learning moment!" 
+                                author="Happy Grandparent">
+                            </review-item>
                             <review-item text="Stallabella is such a relatable character. This book is a must-read!" author="Elementary School Teacher"></review-item>
                         </div>
                     </section>
