@@ -36,7 +36,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 10px; /* Adjust width for page thickness */
+            width: 10px;
+            /* Adjust width for page thickness */
             height: 100%;
             background: linear-gradient(to right, #fff, #ddd);
             box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
@@ -48,10 +49,13 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 10px; /* Adjust position for binding */
-            width: 5px; /* Adjust width for binding */
+            left: 10px;
+            /* Adjust position for binding */
+            width: 5px;
+            /* Adjust width for binding */
             height: 100%;
-            background: #333; /* Color for binding */
+            background: #333;
+            /* Color for binding */
             box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
             transform: perspective(1000px) rotateY(40deg);
             transform-origin: left center;
@@ -63,10 +67,16 @@
     <header-component></header-component>
     <main class="container mx-auto px-4 py-8">
         <about-book id="about"></about-book>
-        <reader-reviews id="reviews"></reader-reviews>
+        <reader-reviews id="reviews">
+            <review-item text="Wonderful story turning a common point of tension into a learning moment!"
+                author="John Z. ( Grandparent )">
+            </review-item>
+            <review-item text="On a scale of 1 to 10, I give this book an 100!!!"
+                author="Penny G. ( 7 year old )"></review-item>
+        </reader-reviews>
         <watch-story id="watch"></watch-story>
         <!-- <code-behind-story id="code"></code-behind-story> -->
-        <!-- <making-movie id="movie"></making-movie> -->
+        <making-movie id="movie"></making-movie>
     </main>
     <footer-component></footer-component>
 
@@ -80,13 +90,13 @@
         class HeaderContent extends HTMLElement {
             connectedCallback() {
                 this.innerHTML = `
-                    <header class="mb-8 relative bg-cover bg-center h-screen flex items-end" style="background-image: url('img/book-006.png'); background-attachment: fixed;">
+                    <header class="mb-8 relative bg-cover bg-center h-screen flex items-end" style="background-image: url('img/book-006.png'); background-attachment: fixed; background-size: cover;">
                         <div class="absolute inset-0 bg-purple-600 opacity-50"></div>
                         <div class="relative z-10 container mx-auto px-4 py-24 text-center text-white mb-8">
-                            <h1 class="text-[12rem] font-bold drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">Stallabella</h1>
-                            <p class="text-2xl drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">A Tale of Playfulness and Punctuality</p>
+                            <h1 class="text-9xl md:text-[12rem] font-bold drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">Stallabella</h1>
+                            <p class="text-xl md:text-2xl drop-shadow-lg" style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">A Tale of Playfulness and Punctuality</p>
                             <div class="mt-8">
-                            <buy-button href="https://drive.google.com/file/d/1SwBSN7XiI3VmJIkjlavYpX41-nCaH91E/view?usp=drive_link" text="Buy on Amazon $12.99"></buy-button>
+                                <buy-button href="https://drive.google.com/file/d/1SwBSN7XiI3VmJIkjlavYpX41-nCaH91E/view?usp=drive_link" text="Buy on Amazon $12.99"></buy-button>
                             </div>
                         </div>
                     </header>
@@ -104,7 +114,7 @@
             connectedCallback() {
                 this.innerHTML = `
                     <section class="mb-12">
-                        <h2 class="text-5xl font-bold mb-8">About the Book</h2>
+                        <sub-title>About the Book</sub-title>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div>
                                 <p class="text-lg mb-4">
@@ -129,22 +139,19 @@
         class ReaderReviews extends HTMLElement {
             connectedCallback() {
                 this.innerHTML = `<reader-reviews-content>
+                     ${this.innerHTML}
                     </reader-reviews-content>`;
             }
         }
 
         class ReaderReviewsContent extends HTMLElement {
-            
+
             connectedCallback() {
                 this.innerHTML = `
                     <section class="mb-8">
-                        <h2 class="text-5xl font-bold mb-8">What Readers Are Saying</h2>
+                        <sub-title>What Readers Are Saying</sub-title>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <review-item 
-                                text="Wonderful story turning a common point of tension into a learning moment!" 
-                                author="Happy Grandparent">
-                            </review-item>
-                            <review-item text="Stallabella is such a relatable character. This book is a must-read!" author="Elementary School Teacher"></review-item>
+                            ${this.innerHTML}
                         </div>
                     </section>
                 `;
@@ -174,7 +181,7 @@
             connectedCallback() {
                 this.innerHTML = `
                     <section class="mb-12">
-                        <h2 class="text-5xl font-bold mb-8">Watch the Story</h2>
+                        <sub-title>Watch the Story</sub-title>
                         <div class="relative" style="padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
                             <iframe src="https://www.youtube.com/embed/6hCrjoZWouk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
                         </div>
@@ -218,11 +225,40 @@
             connectedCallback() {
                 this.innerHTML = `
                     <section class="mb-12">
-                        <h2 class="text-5xl font-bold mb-8">Making the Movie</h2>
+                        <sub-title>Making of Stallabella</sub-title>
                         <p class="text-lg mb-4">
-                            Bringing the Stallabella story to life as a movie was an exciting journey. We used RunwayML's image-to-video generator to animate the storybook images, giving them a dynamic and engaging feel. To add narration, we utilized OpenAI's speech-to-text service to convert the written words of the story into dictation. Finally, we manually stitched everything together in a video editor, ensuring that the visuals and audio flowed seamlessly to create a captivating viewing experience.
+                            Hi, I’m a technologist who’s intrigued by Generative AI. I’ve always loved
+                            storytelling and motion pictures. I’ve dabbled here and there but never really
+                            developed the skills to produce something I wanted to share. Recently, I started
+                            playing around with AI tools and gained the confidence I didn’t have before. I’ll
+                            share everything I did to create this book.
+                        </p>
+                         <sub-title>The Story</sub-title>
+                         <p class="text-lg mb-4">
+                            The story of Stallabella was generated using <a href="https://openai.com/" class="text-blue-500 underline">OpenAI's</a> GPT-3 model. We provided a prompt to the model, asking it to generate a story
+                        </p>
+                        <sub-title>The Video</sub-title>
+                        <p class="text-lg mb-4">
+                            Bringing the Stallabella story to life as a movie was an exciting journey. We used <a href="https://runwayml.com/" class="text-blue-500 underline">RunwayML's</a> image-to-video generator to animate the storybook images, giving them a dynamic and engaging feel. To add narration, we utilized <a href="https://www.openai.com/" class="text-blue-500 underline">OpenAI's</a> speech-to-text service to convert the written words of the story into dictation. Finally, we manually stitched everything together in a video editor, ensuring that the visuals and audio flowed seamlessly to create a captivating viewing experience.
                         </p>
                     </section>
+                    <!--<section class="mb-12">
+                        <sub-title>Tools Used</sub-title>
+                        <div class="flex justify-around items-center mb-8">
+                            <div class="text-center">
+                                <img src="img/runwayml.png" alt="RunwayML Logo" class="h-16 mb-2">
+                                <p class="text-lg"><a href="https://runwayml.com/" class="text-blue-500 underline">RunwayML</a></p>
+                            </div>
+                            <div class="text-center">
+                                <img src="img/openai.png" alt="OpenAI Logo" class="h-16 mb-2">
+                                <p class="text-lg"><a href="https://www.openai.com/" class="text-blue-500 underline">OpenAI</a></p>
+                            </div>
+                            <div class="text-center">
+                                <img src="img/resolve.jpeg" alt="DaVinci Resolve Logo" class="h-16 mb-2">
+                                <p class="text-lg"><a href="https://www.blackmagicdesign.com/products/davinciresolve" class="text-blue-500 underline">DaVinci Resolve</a></p>
+                            </div>
+                        </div>
+                    </section>--!>
                 `;
             }
         }
@@ -273,6 +309,12 @@
             }
         }
 
+        class SubTitle extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = `<h2 class="text-5xl font-bold mb-8">${this.innerHTML}</h2>`;
+            }
+        }
+        customElements.define('sub-title', SubTitle);
         customElements.define('header-component', HeaderComponent);
         customElements.define('header-content', HeaderContent);
         customElements.define('about-book', AboutBook);
